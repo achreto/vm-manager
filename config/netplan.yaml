@@ -1,0 +1,53 @@
+# the default settings for the network
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp1s0:
+      dhcp4: yes
+      dhcp6: no
+      optional: true
+    enp2s0:
+      dhcp4: yes
+      dhcp6: no
+      optional: true
+    enp3s0:
+      dhcp4: yes
+      dhcp6: no
+      optional: true
+    enp4s0:
+      dhcp4: yes
+      dhcp6: no
+      optional: true
+    enp5s0:
+      dhcp4: yes
+      dhcp6: no
+      optional: true
+    enp6s0:
+      dhcp4: yes
+      dhcp6: no
+      optional: true
+    ens0:
+      dhcp4: yes
+      dhcp6: no
+      optional: true
+    ens1:
+      dhcp4: yes
+      dhcp6: no
+      optional: true
+    ens2:
+      dhcp4: yes
+      dhcp6: no
+      optional: true
+    ens3:
+      dhcp4: yes
+      dhcp6: no
+      optional: true
+    ens4:
+      dhcp4: yes
+      dhcp6: no
+      optional: true
+    ens5:
+      dhcp4: yes
+      dhcp6: no
+      optional: true

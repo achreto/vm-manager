@@ -1,0 +1,235 @@
+# default SSHD configuration
+
+# Listen address and Port
+# ------------------------------------------------------------------------
+
+# set port to 2222
+Port 2222
+
+#ListenAddress ::
+#ListenAddress 0.0.0.0
+#AddressFamily any # inet | inet6
+
+
+# Allowed Users
+# ------------------------------------------------------------------------
+
+# don't allow root login
+PermitRootLogin no
+
+# don't allow these users to connect
+DenyUsers root www-data docker
+
+# explicitly allow the users
+AllowUsers admin
+
+#AllowGroups
+#DenyGroups
+
+
+# Connection
+# ------------------------------------------------------------------------
+
+# enable TCP keep alive
+TCPKeepAlive yes
+
+# set the maximum sessions to 1
+MaxSessions 1
+
+# allow compression
+Compression yes
+
+# set the client alive interval to one minute
+ClientAliveInterval 60
+
+# allow two heart beats
+ClientAliveCountMax 2
+
+
+# Authorized Keys Command
+# ------------------------------------------------------------------------
+#AuthorizedKeysCommand
+#AuthorizedKeysCommandUser
+
+
+# Protocol and Cyphers
+# ------------------------------------------------------------------------
+
+# use the more secure protocol 2
+Protocol 2
+
+# restrict the allowed encryption ciphers
+#Ciphers aes256-ctr,aes256-gcm@openssh.com,aes256-cbc
+
+# restrict the allowed MACs
+#MACs hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com
+
+# allow the folowing host key algorithms
+#HostKeyAlgorithms ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521
+
+# alow strong ssh key excahnge algorithms
+#KexAlgorithms ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256
+
+#KexAlgorithms diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,curve25519-sha256,curve25519-sha256@libssh.org
+
+# only allow ed25519 certificates
+PubkeyAcceptedKeyTypes ssh-ed25519-cert-v01@openssh.com,ssh-ed25519
+
+# rekey every 2G of traffic
+RekeyLimit 2G
+
+
+# Key Files
+# ------------------------------------------------------------------------
+
+# set the server bits key to 4096
+ServerKeyBits 4096
+
+# which hosts keys to be used
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+# store the authorized key files not in the users home directory
+AuthorizedKeysFile    /etc/ssh/authorizedkeys/%u/authorized_keys
+
+#TrustedUserCAKeys
+#RevokedKeys
+
+
+# X11 - Disable X forwarding over SSH
+# ------------------------------------------------------------------------
+
+XAuthLocation none
+X11UseLocalhost no
+X11Forwarding no
+
+
+# Don't allow port forwarding
+# ------------------------------------------------------------------------
+
+# disable TCP forwarding
+AllowTcpForwarding no
+
+# disable stream local forwarding
+AllowStreamLocalForwarding no
+
+# disable gateway ports
+GatewayPorts no
+
+# don't allow ssh tunnels
+PermitTunnel no
+
+
+
+# Permissions
+# ------------------------------------------------------------------------
+
+# run the processin in a sandbox
+UsePrivilegeSeparation sandbox
+
+# don't use the login method
+UseLogin no
+
+# set strict file permission mode
+StrictModes yes
+
+
+# Authentication
+# ------------------------------------------------------------------------
+
+# use the PAM module for interactive authentications
+UsePAM yes
+
+# enable password authenticitation with public key
+PasswordAuthentication yes
+
+# don't allow empty passwords
+PermitEmptyPasswords no
+
+# enable public key authentication
+PubkeyAuthentication yes
+
+# don't use host based authentication
+HostbasedAuthentication no
+HostbasedUsesNameFromPacketOnly no
+
+# don't allow remote hosts RSA auth
+RhostsRSAAuthentication no
+
+# set the maximum auth retries to two
+MaxAuthTries 2
+
+# require public key and password or interactive by default
+AuthenticationMethods publickey password
+
+# the time to login is 30 seconds
+LoginGraceTime 30
+
+# we have at most one outstanding connection requests
+MaxStartups 1:50:4
+
+
+
+# Environment
+# ------------------------------------------------------------------------
+AcceptEnv LANG LC_*
+
+# dont exec userrc
+PermitUserRC no
+
+# don't allow user environmnet
+PermitUserEnvironment no
+
+# ignore the users known host file
+IgnoreUserKnownHosts yes
+
+# ignore rhosts and shosts file
+IgnoreRhosts yes
+
+
+# Subsystems
+# ------------------------------------------------------------------------
+#Subsystem sftp /usr/lib/openssh/sftp-server
+
+
+# Messages
+# ------------------------------------------------------------------------
+
+# not print the message o fthe day
+PrintMotd no
+
+# print when the last login was
+PrintLastLog yes
+
+# set the banner to the one we define
+Banner /etc/ssh/banner
+
+# print the debian banner
+DebianBanner yes
+
+
+# Logging
+# ------------------------------------------------------------------------
+
+# we use the auth logging facility
+SyslogFacility AUTH
+
+# set the level to verbose
+LogLevel VERBOSE
+
+# Kerberos
+# ------------------------------------------------------------------------
+#KerberosAuthentication no
+#KerberosGetAFSToken no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+
+
+
+
+# GSSAPI
+# ------------------------------------------------------------------------
+#GSSAPIAuthentication no
+#GSSAPIKeyExchange no
+#GSSAPICleanupCredentials yes
+#GSSAPIStrictAcceptorCheck yes
+#GSSAPIStoreCredentialsOnRekey no
